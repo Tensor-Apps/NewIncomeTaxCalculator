@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Income Tax Regime AY 2025-26 Tax Calculator</title>
+    <meta name="description" content="Calculate your income tax easily with our Income Tax Calculator. Available in multiple languages.">
+    <meta name="keywords" content="Income Tax, Tax Calculator, Financial Tools, Income Tax Calculator in Hindi, Tamil, Telugu, and more">
+    <link rel="alternate" hreflang="en" href="index.html?lang=en" />
+    <link rel="alternate" hreflang="hi" href="index.html?lang=hi" />
+    <link rel="alternate" hreflang="ta" href="index.html?lang=ta" />
+    <link rel="alternate" hreflang="te" href="index.html?lang=te" />
+    <link rel="alternate" hreflang="ml" href="index.html?lang=ml" />
+    <link rel="alternate" hreflang="bn" href="index.html?lang=bn" />
+    <link rel="alternate" hreflang="gu" href="index.html?lang=gu" />
+    <link rel="alternate" hreflang="pa" href="index.html?lang=pa" />
+    <link rel="alternate" hreflang="ur" href="index.html?lang=ur" />
+    <link rel="alternate" hreflang="kn" href="index.html?lang=kn" />
+    <link rel="alternate" hreflang="mr" href="index.html?lang=mr" />
+    <link rel="alternate" hreflang="or" href="index.html?lang=or" />
+    <link rel="alternate" hreflang="as" href="index.html?lang=as" />
+    <link rel="alternate" hreflang="ne" href="index.html?lang=ne" />
+    <link rel="alternate" hreflang="sd" href="index.html?lang=sd" />
+    <link rel="alternate" hreflang="bh" href="index.html?lang=bh" />
+    <link rel="alternate" hreflang="ma" href="index.html?lang=ma" />
+    <link rel="alternate" hreflang="sa" href="index.html?lang=sa" />
+    <link rel="alternate" hreflang="br" href="index.html?lang=br" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        input, button, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="title" class="header">New Income Tax Regime AY 2025-26 Tax Calculator</h2>
+        <label for="income" id="incomeLabel">Enter Annual Income (₹):</label>
+        <input type="number" id="income" class="validate" placeholder="Enter income" required>
+        <button onclick="calculateTax()" id="calculateBtn" class="btn waves-effect waves-light">Calculate Tax</button>
+        <div id="result" class="result"></div>
+        <label for="language">Select Language:</label>
+        <select id="language" class="browser-default" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            <option value="ta">தமிழ் (Tamil)</option>
+            <option value="te">తెలుగు (Telugu)</option>
+            <option value="ml">മലയാളം (Malayalam)</option>
+            <option value="bn">বাংলা (Bengali)</option>
+            <option value="gu">ગુજરાતી (Gujarati)</option>
+            <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+            <option value="ur">اردو (Urdu)</option>
+            <option value="kn">ಕನ್ನಡ (Kannada)</option>
+            <option value="mr">मराठी (Marathi)</option>
+            <option value="or">ଓଡ଼ିଆ (Odia)</option>
+            <option value="as">অসমীয়া (Assamese)</option>
+            <option value="ne">नेपाली (Nepali)</option>
+            <option value="sd">سنڌي (Sindhi)</option>
+            <option value="bh">भोजपुरी (Bhojpuri)</option>
+            <option value="ma">मैथिली (Maithili)</option>
+            <option value="sa">संस्कृत (Sanskrit)</option>
+            <option value="br">ब्रज (Braj)</option>
+        </select>
+    </div>
+    <script>
+        const translations = {
+            en: {
+                title: "New Income Tax Regime AY 2025-26 Tax Calculator",
+                incomeLabel: "Enter Annual Income (₹):",
+                calculateBtn: "Calculate Tax",
+                resultText: "Tax Payable: ₹"
+            },
+            hi: {
+                title: "नया आयकर व्यवस्था AY 2025-26 कर कैलकुलेटर",
+                incomeLabel: "वार्षिक आय दर्ज करें (₹):",
+                calculateBtn: "कर गणना करें",
+                resultText: "देय कर: ₹"
+            },
+            ta: {
+                title: "புதிய வருமான வரி AY 2025-26 கணக்கீட்டாளர்",
+                incomeLabel: "ஆண்டு வருமானம் (₹) உள்ளிடவும்:",
+                calculateBtn: "வரியை கணக்கிடுங்கள்",
+                resultText: "செலுத்த வேண்டிய வரி: ₹"
+            },
+            te: {
+                title: "కొత్త ఆదాయపు పన్ను AY 2025-26 కేల్క్యులేటర్",
+                incomeLabel: "వార్షిక ఆదాయాన్ని నమోదు చేయండి (₹):",
+                calculateBtn: "పన్నును లెక్కించండి",
+                resultText: "పని చెల్లించవలసిన మొత్తం: ₹"
+            },
+            ml: {
+                title: "പുതിയ വരുമാന നികുതി AY 2025-26 കാൽക്കുലേറ്റർ",
+                incomeLabel: "വാർഷിക വരുമാനം (₹) നൽകുക:",
+                calculateBtn: "നികുതി കണക്കാക്കുക",
+                resultText: "നികുതി നൽകേണ്ട തുക: ₹"
+            },
+            bn: {
+                title: "নতুন আয়কর AY 2025-26 ক্যালকুলেটর",
+                incomeLabel: "বার্ষিক আয় লিখুন (₹):",
+                calculateBtn: "কর গণনা করুন",
+                resultText: "কর পরিশোধযোগ্য: ₹"
+            },
+            gu: {
+                title: "નવો આવક કર AY 2025-26 કૅલ્ક્યુલેટર",
+                incomeLabel: "વાર્ષિક આવક દાખલ કરો (₹):",
+                calculateBtn: "કર ગણતરી કરો",
+                resultText: "કર ચૂકવવું: ₹"
+            },
+            pa: {
+                title: "ਨਵਾਂ ਆਯਕਰ AY 2025-26 ਕੈਲਕੁਲੇਟਰ",
+                incomeLabel: "ਸਾਲਾਨਾ ਆਮਦਨ ਦਰਜ ਕਰੋ (₹):",
+                calculateBtn: "ਕਰ ਦੀ ਗਿਣਤੀ ਕਰੋ",
+                resultText: "ਕਰ ਦੇਣਯੋਗ: ₹"
+            },
+            ur: {
+                title: "نیا آمدنی ٽيڪس AY 2025-26 کیلکولیٹر",
+                incomeLabel: "سالانہ آمدنی درج کریں (₹):",
+                calculateBtn: "ٹیکس کا حساب لگائیں",
+                resultText: "قابل ادائیگی ٹیکس: ₹"
+            },
+            kn: {
+                title: "ಹೊಸ ಆದಾಯ ತೆರಿಗೆ AY 2025-26 ಕ್ಯಾಲ್ಕುಲೇಟರ್",
+                incomeLabel: "ವಾರ್ಷಿಕ ಆದಾಯವನ್ನು ನಮೂದಿಸಿ (₹):",
+                calculateBtn: "ತೆರಿಗೆ ಲೆಕ್ಕಹಾಕಿ",
+                resultText: "ಪಾವತಿಸಬೇಕಾದ ತೆರಿಗೆ: ₹"
+            },
+            mr: {
+                title: "आयकर कॅल्क्युलेटर - 2025 च्या बजेटसाठी अद्ययावत",
+                incomeLabel: "वार्षिक उत्पन्न प्रविष्ट करा (₹):",
+                calculateBtn: "कराची गणना करा",
+                resultText: "कर देय: ₹"
+            },
+            or: {
+                title: "ନୂତନ ଆୟକର AY 2025-26 କ୍ୟାଲକୁଲେଟର",
+                incomeLabel: "ବାର୍ଷିକ ଆୟ ଦାଖଲ କରନ୍ତୁ (₹):",
+                calculateBtn: "କର ଗଣନା କରନ୍ତୁ",
+                resultText: "କର ଦେୟ: ₹"
+            },
+            as: {
+                title: "নতুন আয়কৰ AY 2025-26 ক্যালকুলেটৰ",
+                incomeLabel: "বার্ষিক আয় লিখক (₹):",
+                calculateBtn: "কৰ গণনা কৰক",
+                resultText: "কৰ পৰিশোধযোগ্য: ₹"
+            },
+            ne: {
+                title: "नयाँ आयकर AY 2025-26 क्याल्कुलेटर",
+                incomeLabel: "वार्षिक आय प्रविष्ट गर्नुहोस् (₹):",
+                calculateBtn: "कर गणना गर्नुहोस्",
+                resultText: "कर तिर्नु पर्ने: ₹"
+            },
+            sd: {
+                title: "آمدنی ٹیکس کیلکولیٹر - 2025 کے بجٹ کے لیے اپ ڈیٹ کیا گیا",
+                incomeLabel: "سالانہ آمدنی درج کریں (₹):",
+                calculateBtn: "ٹیکس کا حساب لگائیں",
+                resultText: "قابل ادائیگی ٹیکس: ₹"
+            },
+            bh: {
+                title: "आयकर कॅल्क्युलेटर - 2025 च्या बजेटसाठी अद्ययावत",
+                incomeLabel: "वार्षिक आय दर्ज करें (₹):",
+                calculateBtn: "कर गणना करें",
+                resultText: "देय कर: ₹"
+            },
+            ma: {
+                title: "आयकर कॅल्क्युलेटर - 2025 च्या बजेटसाठी अद्ययावत",
+                incomeLabel: "वार्षिक आय दर्ज करें (₹):",
+                calculateBtn: "कर गणना करें",
+                resultText: "देय कर: ₹"
+            },
+            sa: {
+                title: "आयकर कॅल्क्युलेटर - 2025 च्या बजेटसाठी अद्ययावत",
+                incomeLabel: "वार्षिक आय दर्ज करें (₹):",
+                calculateBtn: "कर गणना करें",
+                resultText: "देय कर: ₹"
+            },
+            br: {
+                title: "नवीन आयकर AY 2025-26 कॅल्क्युलेटर",
+                incomeLabel: "वार्षिक आय दर्ज करें (₹):",
+                calculateBtn: "कर गणना करें",
+                resultText: "देय कर: ₹"
+            }
+        };
+
+        function calculateTax() {
+            let income = parseFloat(document.getElementById("income").value);
+            if (isNaN(income) || income < 0) {
+                document.getElementById("result").innerHTML = "Please enter a valid income.";
+                return;
+            }
+            
+            let tax = 0;
+            let oldTax = 0;
+            let tableHTML = "<table><tr><th>Income Range (₹)</th><th>Taxable Amount (₹)</th><th>Tax Rate</th><th>Tax (₹)</th></tr>";
+            
+            if (income > 1200000){
+                let slabs = [
+                    [0, 400000, 0],
+                    [400000, 800000, 0.05],
+                    [800000, 1200000, 0.10],
+                    [1200000, 1600000, 0.15],
+                    [1600000, 2000000, 0.20],
+                    [2000000, 2400000, 0.25],
+                    [2400000, Infinity, 0.30]
+                ];
+                
+                for (let [lower, upper, rate] of slabs) {
+                    if (income > lower) {
+                        let taxableAmount = Math.min(income, upper) - lower;
+                        let taxForSlab = taxableAmount * rate;
+                        tax += taxForSlab;
+                        tableHTML += `<tr><td>${lower} - ${upper}</td><td>${taxableAmount.toLocaleString()}</td><td>${(rate * 100).toFixed(0)}%</td><td>${taxForSlab.toLocaleString()}</td></tr>`;
+                    } else {
+                        break;
+                    }
+                }
+                
+                let oldSlabs = [
+                    [0, 300000, 0],
+                    [300000, 700000, 0.05],
+                    [700000, 1000000, 0.10],
+                    [1000000, 1200000, 0.15],
+                    [1200000, 1500000, 0.20],
+                    [1500000, Infinity, 0.30]
+                ];
+                
+                for (let [lower, upper, rate] of oldSlabs) {
+                    if (income > lower) {
+                        let taxableAmount = Math.min(income, upper) - lower;
+                        let oldTaxForSlab = taxableAmount * rate;
+                        oldTax += oldTaxForSlab;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            
+            tableHTML += "</table>";
+            
+            let lang = document.getElementById("language").value;
+            let savings = oldTax - tax;
+            document.getElementById("result").innerHTML = `${translations[lang].resultText} ₹${tax.toLocaleString()}<br>Old Tax: ₹${oldTax.toLocaleString()}<br>Savings: ₹${savings.toLocaleString()}<br>${tableHTML}`;
+        }
+        
+        function changeLanguage() {
+            let lang = document.getElementById("language").value;
+            document.getElementById("title").innerText = translations[lang].title;
+            document.getElementById("incomeLabel").innerText = translations[lang].incomeLabel;
+            document.getElementById("calculateBtn").innerText = translations[lang].calculateBtn;
+        }
+        
+        function detectUserLocation() {
+            fetch("https://ipapi.co/json/")
+                .then(response => response.json())
+                .then(data => {
+                    let state = data.region;
+                    let stateLangMap = {
+                        "Delhi": "hi", "Uttar Pradesh": "hi", "Madhya Pradesh": "hi", "Bihar": "hi",
+                        "Tamil Nadu": "ta", "Karnataka": "ta", "Kerala": "ml", "Andhra Pradesh": "te", "Telangana": "te"
+                    };
+                    let userLang = stateLangMap[state] || "en";
+                    document.getElementById("language").value = userLang;
+                    changeLanguage();
+                })
+                .catch(() => console.log("Could not detect location"));
+        }
+        
+        detectUserLocation();
+    </script>
+</body>
+</html>
